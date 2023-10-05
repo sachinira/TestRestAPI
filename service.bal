@@ -1,16 +1,24 @@
 import ballerina/http;
+import ballerina/io;
 
-configurable string age = ?;
+configurable string clientCertFile = ? ;
+configurable string clientPrivateKeyFile = ? ;
+configurable string clientPublicCert = ? ;
 
-# A service representing a network-accessible API
-# bound to port `9090`.
-service / on new http:Listener(9090) {
+listener http:Listener securedEP = new (9090);
 
-    # + return - Json with configured age
-    resource function get age() returns json {
-        // Send a response back to the caller with the configuration value.
-        return {
-            value: age
-        };
+service / on securedEP {
+    resource function get getInfo() returns json|error {
+        http:Client blsClient = check new ("https://services.bls.ch/services/rest",
+            secureSocket = {
+                key: {
+                    certFile: clientCertFile,
+                    keyFile: clientPrivateKeyFile
+                },
+                cert: clientPublicCert,
+                enable: true
+            });
+        http:Response reports = check blsClient->/;
+        io:println((check reports.getJsonPayload()).toString());
     }
 }
