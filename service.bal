@@ -1,10 +1,9 @@
 import ballerina/http;
-import ballerina/os;
 import ballerina/io;
 
-configurable string clientCertFile = os:getEnv("clientCertFile") ;
-configurable string clientPrivateKeyFile = os:getEnv("clientPrivateKeyFile") ;
-configurable string clientPublicCert = os:getEnv("clientPublicCert") ;
+configurable string clientCertFile = ? ;
+configurable string clientPrivateKeyFile = ? ;
+configurable string clientPublicCert = ? ;
 
 listener http:Listener securedEP = new (9090);
 
