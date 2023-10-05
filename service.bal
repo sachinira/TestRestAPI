@@ -1,9 +1,9 @@
 import ballerina/http;
 import ballerina/io;
 
-configurable string clientCertFile = ? ;
-configurable string clientPrivateKeyFile = ? ;
-configurable string clientPublicCert = ? ;
+configurable string clientcertfile = ? ;
+configurable string clientprivatekeyile = ? ;
+configurable string clientpubliccert = ? ;
 
 listener http:Listener securedEP = new (9090);
 
@@ -12,10 +12,10 @@ service / on securedEP {
         http:Client blsClient = check new ("https://services.bls.ch/services/rest",
             secureSocket = {
                 key: {
-                    certFile: clientCertFile,
-                    keyFile: clientPrivateKeyFile
+                    certFile: clientcertfile,
+                    keyFile: clientprivatekeyile
                 },
-                cert: clientPublicCert,
+                cert: clientpubliccert,
                 enable: true
             });
         http:Response reports = check blsClient->/;
