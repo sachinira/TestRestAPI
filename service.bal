@@ -8,7 +8,7 @@ configurable string clientpubliccert = ? ;
 listener http:Listener securedEP = new (9090);
 
 service / on securedEP {
-    resource function get getInfo() returns json|error {
+    resource function get age() returns json|error {
         http:Client blsClient = check new ("https://services.bls.ch/services/rest",
             secureSocket = {
                 key: {
