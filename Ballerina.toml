@@ -2,7 +2,7 @@
   observabilityIncluded = true
 
 [package]
-  distribution = "2201.3.1"
-  name = "configurable_service_v3"
-  org = "choreouptime"
+  distribution = "2201.8.0"
+  name = "service"
+  org = "sachiniranasinghe"
   version = "0.1.0"
